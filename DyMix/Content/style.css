@@ -1,0 +1,23 @@
+﻿body {
+    padding-top: 70px;
+}
+
+.field-validation-error {
+    width: 100%;
+    color: #BF100B;
+    display: block;
+}
+
+.toolbar {
+    padding-bottom: 10px;
+}
+.vertical-list-item {
+    width: 100%;
+}
+    .vertical-list-item .vlist-label {
+        padding: 0px 10px;
+    }
+    .vertical-list-item .vlist-btn {
+        color: red;
+        cursor: pointer;
+    }

@@ -147,6 +147,9 @@
   <data name="Label_RememberMe" xml:space="preserve">
     <value>Keep me logged in</value>
   </data>
+  <data name="Message_WrongLogin" xml:space="preserve">
+    <value>Please re-enter your password</value>
+  </data>
   <data name="Placeholder_ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
   </data>

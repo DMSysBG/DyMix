@@ -1,0 +1,21 @@
+﻿@model List<DiscountModel>
+@{
+    ViewBag.Title = "Отстъпки";
+}
+<div class="row-fluid">
+    <div class="span12 toolbar">
+        <a class="btn btn-primary" href="~/Discount/New">Нова</a>
+    </div>
+    <div class="span12">
+        @{
+            var grid = new WebGrid(@Model, rowsPerPage: 10, canPage: true);
+
+            List<WebGridColumn> cols = new List<WebGridColumn>();
+            cols.Add(grid.Column(format: (item) => Html.ActionLink("Редакция", "Edit", new { id = item.DiscountId })));
+            cols.Add(grid.Column("Name", "Име"));
+            cols.Add(grid.Column("DiscountKindName", "Важи за"));
+            cols.Add(grid.Column("Value", "Стойност"));
+        }
+        @grid.GetHtml(tableStyle: "table table-bordered table-hover", columns: cols)
+    </div>
+</div>

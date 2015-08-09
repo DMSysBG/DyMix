@@ -132,31 +132,68 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Account.resx</DependentUpon>
     </Compile>
+    <Content Include="Scripts\_references.js" />
+    <Compile Include="Contexts\AccountContext.cs" />
+    <Compile Include="Contexts\DiscountContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContractorController.cs" />
+    <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AppModel.cs" />
+    <Compile Include="Models\ContractorModel.cs" />
+    <Compile Include="Models\DiscountModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="xConfig.cs" />
+    <Compile Include="xSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\Bootstrap\css\bootstrap-theme.css" />
-    <Content Include="Content\Bootstrap\css\bootstrap-theme.min.css" />
-    <Content Include="Content\Bootstrap\css\bootstrap.css" />
-    <Content Include="Content\Bootstrap\css\bootstrap.min.css" />
-    <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\Bootstrap\js\bootstrap.js" />
-    <Content Include="Content\Bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\Bootstrap\js\npm.js" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\Bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\Bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\Bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\Bootstrap\js\npm.js" />
     <Content Include="Content\Images\alert-red.png" />
-    <Content Include="Content\jQuery\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jQuery\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\external\jquery\jquery.js" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\index.html" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\jquery-ui.css" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\jquery-ui.js" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\jquery-ui.min.css" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\jquery-ui.min.js" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\jquery-ui.structure.css" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\jquery-ui.structure.min.css" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\jquery-ui.theme.css" />
+    <Content Include="Scripts\jQuery\ui-1.11.4\jquery-ui.theme.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -209,20 +246,37 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Bootstrap\css\bootstrap-theme.css.map" />
-    <Content Include="Content\Bootstrap\css\bootstrap.css.map" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap.css.map" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\Bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\Bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\Bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\Bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\Bootstrap\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\NStore.pubxml" />
+    <Content Include="Views\Contractor\Index.cshtml" />
+    <Content Include="Views\Contractor\EditPerson.cshtml" />
+    <Content Include="Views\Contractor\EditCompany.cshtml" />
+    <Content Include="Views\Discount\Index.cshtml" />
+    <Content Include="Views\Discount\Groups.cshtml" />
+    <Content Include="Views\Discount\Edit.cshtml" />
+    <Content Include="Views\Discount\EditGroup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DMSys.SourceForge\DMSys.Framesource\DMSys.Data\DMSys.Data.csproj">
+      <Project>{d731ebc1-783f-4c37-8198-3be8c419f506}</Project>
+      <Name>DMSys.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DMSys.SourceForge\DMSys.Framesource\DMSys.Systems\DMSys.Systems.csproj">
+      <Project>{e611627d-89d3-4560-959f-05cd28510086}</Project>
+      <Name>DMSys.Systems</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

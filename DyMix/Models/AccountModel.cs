@@ -48,4 +48,15 @@ namespace DyMix.Models
         [Compare("Password", ErrorMessageResourceName = "CompareNewPassword", ErrorMessageResourceType = typeof(Resources.ErrorMessages))]
         public string ConfirmPassword { get; set; }
     }
+
+    public class AccountModel
+    {
+        public int ActionId { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string LanguageCode { get; set; }
+    }
 }

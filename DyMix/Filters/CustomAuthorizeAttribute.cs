@@ -17,20 +17,25 @@ namespace DyMix.Filters
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            /*
-            string[] users = Users.Split(',');
-
-            if (!httpContext.User.Identity.IsAuthenticated)
-                return false;
-
-            if (users.Length > 0 &&
-                !users.Contains(httpContext.User.Identity.Name,
-                    StringComparer.OrdinalIgnoreCase))
-                return false;
-            */
             bool isLogin = false;
+            // Ако няма оторизация
+            if (!httpContext.User.Identity.IsAuthenticated)
+            { isLogin = false; }
+            // Ако няма сесия
+            else if (!xSession.IsLogin)
+            { isLogin = false; }
+            // Логнат е
+            else
+            { isLogin = true; }
 
-
+            // Ако не е логнат
+            if (!isLogin)
+            {
+                // Затрива сесията
+                xSession.RemoveAll();
+                // Затрива Cookie на IIS
+                System.Web.Security.FormsAuthentication.SignOut();
+            }
             return isLogin;
             /*
             // Ако няма сесия, прави опит за автоматична оторизация

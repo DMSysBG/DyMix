@@ -147,6 +147,9 @@
   <data name="Label_RememberMe" xml:space="preserve">
     <value>Запомни ме</value>
   </data>
+  <data name="Message_WrongLogin" xml:space="preserve">
+    <value>Моля, въведете отново паролата си</value>
+  </data>
   <data name="Placeholder_ConfirmPassword" xml:space="preserve">
     <value>Потвърди паролата</value>
   </data>

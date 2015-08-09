@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using DyMix.Contexts;
 using DyMix.Models;
 
 namespace DyMix.Controllers
@@ -16,12 +17,6 @@ namespace DyMix.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            /*
-            LoginModel model = new LoginModel()
-            {
-                UserName = "ggg"
-            };
-            */
             return View();
         }
 
@@ -31,8 +26,37 @@ namespace DyMix.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public ActionResult Login(LoginModel model, string returnUrl = "~/")
         {
+            if (ModelState.IsValid)
+            {
+                AccountModel account = null;
+                try
+                {
+                    using (AccountContext context = new AccountContext())
+                    {
+                        account = context.Login(model.UserName, model.Password);
+                    }
+                }
+                catch
+                { }
+                if (account == null)
+                {
+                    ModelState.AddModelError("", Resources.Account.Message_WrongLogin);
+                    return View(model);
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(model.UserName, false);
+                    xSession.AccountId = account.ActionId;
+                    xConfig.SetCookieSettings(account.LanguageCode);
+
+                    if (Url.IsLocalUrl(returnUrl))
+                    { return Redirect(returnUrl); }
+                    else
+                    { return Redirect("~/"); }
+                }
+            }
             return View();
         }
 
@@ -77,7 +101,7 @@ namespace DyMix.Controllers
                     return RedirectToAction("Index", "Home");
                      */
                 }
-                catch (MembershipCreateUserException e)
+                catch /* (MembershipCreateUserException e) */
                 {
                    // ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }

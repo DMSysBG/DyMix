@@ -32,21 +32,20 @@ namespace DyMix
             string lang = Request.QueryString["lang"];
             if (String.IsNullOrWhiteSpace(lang))
             {
-                HttpCookie cookie = Request.Cookies["UserLanguage"];
-                if (cookie != null
-                  && cookie.Value != null
-                  && cookie.Value.Trim() != string.Empty)
-                { cultureCode = cookie.Value; }
+                HttpCookie cookie = xConfig.GetCookieSettings();
+                if (cookie != null)
+                {
+                    string cookieCultureCode = cookie["CultureCode"];
+                    if( !String.IsNullOrWhiteSpace(cookieCultureCode))
+                    { cultureCode = cookieCultureCode; }
+                }
             }
             else
-            { cultureCode = lang; }
-            //Default Language/Culture for all number, Date format  
-            System.Threading.Thread.CurrentThread.CurrentCulture =
-            System.Globalization.CultureInfo.CreateSpecificCulture("en");
-
-            //Ui Culture for Localized text in the UI  
-            System.Threading.Thread.CurrentThread.CurrentUICulture =
-            new System.Globalization.CultureInfo(cultureCode);
+            {
+                xConfig.SetCookieSettings(lang);
+                cultureCode = lang;
+            }
+            xConfig.SetThreadCulture(cultureCode);
         }
     }
 }

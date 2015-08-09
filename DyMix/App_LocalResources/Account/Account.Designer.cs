@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please re-enter your password.
+        /// </summary>
+        public static string Message_WrongLogin {
+            get {
+                return ResourceManager.GetString("Message_WrongLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         public static string Placeholder_ConfirmPassword {

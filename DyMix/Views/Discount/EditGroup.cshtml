@@ -1,0 +1,128 @@
+﻿@model DiscountGroupModel
+@{
+    ViewBag.Title = "Група отстъпки";
+}
+<script>
+    $(function () {
+        $("#discountName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Discount/JFilterList",
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 0,
+            select: function (event, ui) {
+                $("#discountId").val(ui.item.id);
+                /*
+                log(ui.item ?
+                  "Selected: " + ui.item.label :
+                  "Nothing selected, input was " + this.value);
+                  */
+            },
+            open: function () {
+                // $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                // $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        }).focus(function () {
+            $(this).autocomplete("search");
+        });
+    });
+
+    function AddDiscount() {
+        var discountId = $("#discountId").val();
+        if (discountId == '') {
+            return;
+        }
+        var discountName = $("#discountName").val();
+
+        var htmlDiscountList = $("#DiscountList");
+        var discountList = htmlDiscountList.val();
+        if (discountList == '') {
+            discountList = ',';
+        }
+        // добавена ли е отстъпката?
+        if (discountList.indexOf(',' + discountId + ',') >= 0) {
+            alert('Отстъпката е вече добавена');
+            $("#discountId").val('');
+            $("#discountName").val('');
+            return;
+        }
+        htmlDiscountList.val(discountList + discountId + ',');
+            
+        $("#discountViewList").append(CreateDiscountItem(discountId, discountName));
+        $("#discountId").val('');
+        $("#discountName").val('');
+    }
+
+    function DeleteDiscount(discountId) {
+        var htmlDiscountList = $("#DiscountList");
+        var discountList = htmlDiscountList.val().replace(',' + discountId + ',', ',');
+        htmlDiscountList.val(discountList);
+
+        $("#discountItem_" + discountId).html('');
+    }
+
+    function CreateDiscountItem(discountId, discountName) {
+        return '<div class="vertical-list-item" id="discountItem_' + discountId + '">' +
+                '<span class="glyphicon glyphicon-remove vlist-btn" aria-hidden="true" onclick="DeleteDiscount(' + discountId + ')"></span>' +
+                '<span class="vlist-label">' + discountName + '</span>' +
+            '</div>';
+    }
+
+    $(document).ready(function () {
+        $.post("/Discount/JList", { discountList: $("#DiscountList").val() })
+            .done(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#discountViewList").append(CreateDiscountItem(data[i].id, data[i].label));
+                }                
+            });
+    });
+</script>
+<div class="row-fluid">
+    <div class="col-md-8">
+        <form method="post" class="form-horizontal" enctype="multipart/form-data">
+            @Html.HiddenFor(m => m.DiscountGroupId)
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DiscountList, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        @Html.HiddenFor(m => m.DiscountList)
+                        <input type="hidden" id="discountId" />
+                        <input type="text" class="form-control" placeholder="Добави отстъпка към групата"
+                               id="discountName">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="AddDiscount()">Добави</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="input-group" id="discountViewList"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-primary">Запис</button>
+                    <a href="~/Discount/Groups" class="btn btn-default">Отказ</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

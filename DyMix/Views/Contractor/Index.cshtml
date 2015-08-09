@@ -1,0 +1,22 @@
+﻿@model List<ContractorModel>
+@{
+    ViewBag.Title = "Клиенти и Доставчици";
+}
+<div class="row-fluid">
+    <div class="span12 toolbar">
+        <a class="btn btn-primary" href="~/Contractor/NewCompany">Нова фирма</a>
+    </div>
+    <div class="span12">
+        @{
+            var grid = new WebGrid(@Model, rowsPerPage: 10, canPage: true);
+
+            List<WebGridColumn> cols = new List<WebGridColumn>();
+            cols.Add(grid.Column(format: (item) => Html.ActionLink("Редакция", "Edit", new { id = item.ContractorId })));
+            cols.Add(grid.Column("IdContractor", "ИН по ДДС"));
+            cols.Add(grid.Column("Name", "Име"));
+            cols.Add(grid.Column("Address", "Адрес"));
+            cols.Add(grid.Column("AccountablePerson", "МОЛ"));            
+        }
+        @grid.GetHtml(tableStyle: "table table-bordered table-hover", columns: cols)
+    </div>
+</div>

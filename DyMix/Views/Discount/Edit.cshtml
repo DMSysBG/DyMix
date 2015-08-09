@@ -1,0 +1,67 @@
+﻿@model DiscountModel
+@{
+    ViewBag.Title = "Отстъпка";
+}
+<script>
+    $(function () {
+        $("#ValidFrom").datepicker({
+            dateFormat: "dd.mm.yy"
+        });
+        $("#ValidTo").datepicker({
+            dateFormat: "dd.mm.yy"
+        });
+    });
+</script>
+<div class="row-fluid">
+    <div class="col-md-8">
+        <form method="post" class="form-horizontal" enctype="multipart/form-data">
+            @Html.HiddenFor(m => m.DiscountId)
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ValidFrom, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.ValidFrom, Html.ToDisplayDate(Model.ValidFrom),
+                            new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ValidFrom)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ValidTo, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.ValidTo, Html.ToDisplayDate(Model.ValidTo),
+                            new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ValidTo)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DiscountKindId, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(m => m.DiscountKindId,
+                            new SelectList(ViewBag.DiscountKinds, "DiscountKindId", "Name", Model.DiscountKindId),
+                            new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DiscountKindId)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Value, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.Value, Html.ToDisplayDecimal(Model.Value),
+                                                new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Value)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-primary">Запис</button>
+                    <a href="~/Discount" class="btn btn-default">Отказ</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

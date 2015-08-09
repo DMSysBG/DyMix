@@ -4,7 +4,6 @@
 }
 <style>
     .col-group {
-        padding-top:40px;
     }
     .panel-heading {
         padding: 5px 15px;
@@ -25,6 +24,17 @@
         text-align: center;
         padding-bottom: 10px;
     }
+    .validation-summary-errors{
+        width: 100%;
+        color: #BF100B;
+    }
+        .validation-summary-errors ul {
+        }
+            .validation-summary-errors ul li {
+                list-style-type: none;
+                text-align: center;
+                padding-bottom: 10px;
+            }
 </style>
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-3 col-group">
@@ -35,13 +45,13 @@
             <div class="panel-body">
                 @using (Html.BeginForm())
                 {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
                     <fieldset>
                         <div class="row">
                             <div class="center-block">
                                 <img class="profile-img" src="~/Content/Images/alert-red.png" alt="">
                             </div>
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
                             @Html.ValidationMessageFor(m => m.UserName)
                             @Html.ValidationMessageFor(m => m.Password)
                         </div>
@@ -52,7 +62,12 @@
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-user"></i>
                                         </span>
-                                        <input class="form-control" placeholder="@Resources.Account.Placeholder_LoginName" name="UserName" type="text" autofocus>
+                                        @Html.TextBoxFor(m => m.UserName, new
+                                        {
+                                            @class = "form-control",
+                                            autofocus = "autofocus",
+                                            placeholder = Resources.Account.Placeholder_LoginName
+                                        })
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -60,7 +75,11 @@
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-lock"></i>
                                         </span>
-                                        <input class="form-control" placeholder="@Resources.Account.Placeholder_Password" name="Password" type="password" value="">
+                                        @Html.PasswordFor(m => m.Password, new
+                                        {
+                                            @class = "form-control",
+                                            placeholder = Resources.Account.Placeholder_Password
+                                        })
                                     </div>
                                 </div>
                                 <div class="form-group">

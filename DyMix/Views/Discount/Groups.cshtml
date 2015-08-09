@@ -1,0 +1,19 @@
+﻿@model List<DiscountGroupModel>
+@{
+    ViewBag.Title = "Групи отстъпки";
+}
+<div class="row-fluid">
+    <div class="span12 toolbar">
+        <a class="btn btn-primary" href="~/Discount/NewGroup">Нова</a>
+    </div>
+    <div class="span12">
+        @{
+            var grid = new WebGrid(@Model, rowsPerPage: 10, canPage: true);
+
+            List<WebGridColumn> cols = new List<WebGridColumn>();
+            cols.Add(grid.Column(format: (item) => Html.ActionLink("Редакция", "EditGroup", new { id = item.DiscountGroupId })));
+            cols.Add(grid.Column("Name", "Име"));
+        }
+        @grid.GetHtml(tableStyle: "table table-bordered table-hover", columns: cols)
+    </div>
+</div>
