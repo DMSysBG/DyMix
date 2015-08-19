@@ -1,5 +1,46 @@
-﻿@{
-    ViewBag.Title = "Company";
+﻿@model ContractorModel
+@{
+    ViewBag.Title = "Фирма";
 }
-
-<h2>EditPerson</h2>
+<div class="row-fluid">
+    <div class="col-md-8">
+        <form method="post" class="form-horizontal" enctype="multipart/form-data">
+            @Html.HiddenFor(m => m.ContractorId)
+            @Html.HiddenFor(m => m.ContractorTypeId)
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.IdContractor, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.IdContractor, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.IdContractor)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Address, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.AccountablePerson, new { @class = "col-sm-4 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.AccountablePerson, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.AccountablePerson)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-primary">Запис</button>
+                    <a href="~/Contractor" class="btn btn-default">Отказ</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

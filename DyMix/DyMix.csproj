@@ -132,10 +132,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Account.resx</DependentUpon>
     </Compile>
+    <Content Include="Scripts\script.js" />
     <Content Include="Scripts\_references.js" />
     <Compile Include="Contexts\AccountContext.cs" />
+    <Compile Include="Contexts\ContractorContext.cs" />
+    <Compile Include="Contexts\CCardContext.cs" />
     <Compile Include="Contexts\DiscountContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CCardController.cs" />
     <Compile Include="Controllers\ContractorController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -146,6 +150,7 @@
     <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AppModel.cs" />
+    <Compile Include="Models\CCardModel.cs" />
     <Compile Include="Models\ContractorModel.cs" />
     <Compile Include="Models\DiscountModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -267,6 +272,8 @@
     <Content Include="Views\Discount\Groups.cshtml" />
     <Content Include="Views\Discount\Edit.cshtml" />
     <Content Include="Views\Discount\EditGroup.cshtml" />
+    <Content Include="Views\CCard\Index.cshtml" />
+    <Content Include="Views\CCard\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\DMSys.SourceForge\DMSys.Framesource\DMSys.Data\DMSys.Data.csproj">

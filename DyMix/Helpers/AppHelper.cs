@@ -10,7 +10,7 @@ namespace System.Web.Mvc
         public static string ToDisplayDate(this HtmlHelper htmlHelper, DateTime? value)
         {
             return (value == null) ? "" : ((DateTime)value).ToString("dd.MM.yyyy");
-        }
+        }    
 
         public static string ToDisplayDecimal(this HtmlHelper htmlHelper, decimal? value)
         {

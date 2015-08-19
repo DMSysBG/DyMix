@@ -1,0 +1,25 @@
+﻿@model List<CCardModel>
+@{
+    ViewBag.Title = "Клиентски карти";
+}
+<div class="row-fluid">
+    <div class="span12 toolbar">
+        <a class="btn btn-primary" href="~/CCard/New">Нова фирма</a>
+    </div>
+    <div class="span12">
+        @{
+            var grid = new WebGrid(@Model, rowsPerPage: 10, canPage: true);
+
+            List<WebGridColumn> cols = new List<WebGridColumn>();
+            cols.Add(grid.Column(format: (item) => Html.ActionLink("Редакция", "Edit", new { id = item.CardId })));
+            cols.Add(grid.Column("CNumber", "Номер"));
+            cols.Add(grid.Column("От дата", format: (item) => 
+                @Html.Raw(item.ValidFrom.ToString("dd.MM.yyyy")) ));
+            cols.Add(grid.Column("До дата", format: (item) =>
+                @Html.Raw(item.ValidTo.ToString("dd.MM.yyyy"))));
+            cols.Add(grid.Column("Блокирана", format: (item) =>
+                @Html.Raw((item.IsBlocked ? "Да" : "Не"))));            
+        }
+        @grid.GetHtml(tableStyle: "table table-bordered table-hover", columns: cols)
+    </div>
+</div>
