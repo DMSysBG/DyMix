@@ -130,6 +130,38 @@ namespace DyMix.Contexts
             }
             return model;
         }
+        
+        /// <summary>
+        /// Списък групи отстъки
+        /// </summary>
+        public List<ListItemModel> GetGroupList()
+        {
+            List<ListItemModel> model = new List<ListItemModel>();
+            model.Add(new ListItemModel()
+            {
+                id = "-1",
+                label = "Без отстъпка",
+                abbrev = ""
+            });
+            string commandText =
+@"SELECT dg.ID, dg.DG_NAME
+ FROM DISCOUNT_GROUP dg
+ ORDER BY dg.DG_NAME ";
+
+            using (DataTable dtDiscounts = FillDataTable(commandText))
+            {
+                foreach (DataRow drDiscount in dtDiscounts.Rows)
+                {
+                    model.Add(new ListItemModel()
+                    {
+                        id = TryParse.ToString(drDiscount["ID"]),
+                        label = TryParse.ToString(drDiscount["DG_NAME"]),
+                        abbrev = ""
+                    });
+                }
+            }
+            return model;
+        }
 
         public DiscountModel GetDiscount(int id)
         {

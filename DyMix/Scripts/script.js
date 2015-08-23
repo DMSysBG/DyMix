@@ -27,6 +27,7 @@ function dmAutocomplete(sourceUrl, itemName, itemId) {
                 }
             });
         },
+        minLength: 0,
         select: function (event, ui) {
         },
         change: function (event, ui) {
@@ -42,5 +43,7 @@ function dmAutocomplete(sourceUrl, itemName, itemId) {
             noResults: '',
             results: function () { }
         }
+    }).focus(function () {
+        $(this).autocomplete("search");
     });
 }

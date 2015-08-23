@@ -18,46 +18,99 @@
         @Html.HiddenFor(m => m.CardId)
         <div class="col-md-6 form-horizontal">
             <div class="form-group form-group-sm">
-                @Html.LabelFor(m => m.CNumber, new { @class = "col-sm-4 control-label" })
-                <div class="col-sm-8">
+                @Html.LabelFor(m => m.CNumber, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
                     @Html.TextBoxFor(m => m.CNumber, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.CNumber)
                 </div>
             </div>
             <div class="form-group form-group-sm">
-                @Html.LabelFor(m => m.ValidFrom, new { @class = "col-sm-4 control-label" })
-                <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.ValidFrom, Html.ToDisplayDate(Model.ValidFrom),
+            <div style="display:table; width:100%;">
+                <div style="display:table-cell; width: 50%">
+                    @Html.LabelFor(m => m.ValidFrom, new { @class = "col-sm-6 control-label" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(m => m.ValidFrom, Html.ToDisplayDate(Model.ValidFrom),
                             new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.ValidFrom)
+                        @Html.ValidationMessageFor(m => m.ValidFrom)
+                    </div>
+                </div>
+                <div style="display:table-cell; width: 50%">
+                    @Html.LabelFor(m => m.ValidTo, new { @class = "col-sm-6 control-label" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(m => m.ValidTo, Html.ToDisplayDate(Model.ValidTo),
+                            new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ValidTo)
+                    </div>
                 </div>
             </div>
-            <div class="form-group form-group-sm">
-                @Html.LabelFor(m => m.ValidTo, new { @class = "col-sm-4 control-label" })
-                <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.ValidTo, Html.ToDisplayDate(Model.ValidTo),
-                            new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.ValidTo)
-                </div>
             </div>
             <div class="form-group form-group-sm">
-                @Html.LabelFor(m => m.IsBlocked, new { @class = "col-sm-4 control-label" })
-                <div class="col-sm-8">
+                @Html.LabelFor(m => m.IsBlocked, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-3">
                     @Html.CheckBoxFor(m => m.IsBlocked, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.IsBlocked)
                 </div>
+                @Html.LabelFor(m => m.IsInvoice, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-3">
+                    @Html.CheckBoxFor(m => m.IsInvoice, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.IsInvoice)
+                </div>
             </div>
-            <div class="form-group  form-group-sm">
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(m => m.IsManualInput, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-3">
+                    @Html.CheckBoxFor(m => m.IsManualInput, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.IsManualInput)
+                </div>
+                @Html.LabelFor(m => m.Password, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
                 @Html.HiddenFor(m => m.ContractorId)
-                @Html.LabelFor(m => m.ContractorName, new { @class = "col-sm-4 control-label" })
-                <div class="col-sm-8">
+                @Html.LabelFor(m => m.ContractorName, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
                     @Html.TextBoxFor(m => m.ContractorName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.ContractorId)
                 </div>
             </div>
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(m => m.OwnerName, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.OwnerName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.OwnerName)
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(m => m.CarNumber, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.CarNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CarNumber)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 form-horizontal">
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(m => m.DiscountGroupId, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(m => m.DiscountGroupId, 
+                        new SelectList(ViewBag.DiscountGroups, "id", "label"),
+                        new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DiscountGroupId)
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(m => m.Comment, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.TextAreaFor(m => m.Comment, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Comment)
+                </div>
+            </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-8">
+            <div class="col-sm-offset-6 col-sm-6" style="text-align: right;">
                 <button type="submit" class="btn btn-primary">Запис</button>
                 <a href="~/CCard" class="btn btn-default">Отказ</a>
             </div>

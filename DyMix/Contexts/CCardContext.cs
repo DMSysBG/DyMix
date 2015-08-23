@@ -56,6 +56,14 @@ namespace DyMix.Contexts
        , cc.IS_BLOCKED
        , c.ID AS CONTRACTOR_ID
        , c.C_NAME AS CONTRACTOR_NAME
+       , cc.DISCOUNT_GROUP_ID
+       , cc.OWNER_NAME
+       , cc.CAR_NUMBER
+       , cc.IS_INVOICE
+       , cc.IS_MANUAL_INPUT
+       , cc.C_COMMENT
+       , cc.S_PAYMENT_TYPE_ID
+       , cc.C_PASSWORD
  FROM C_CARD cc
  LEFT JOIN CONTRACTOR c ON c.ID = cc.CONTRACTOR_ID
  WHERE cc.ID = " + SQLInt(id);
@@ -72,7 +80,15 @@ namespace DyMix.Contexts
                         ValidTo = TryParse.ToDateTime(drCCard["VALID_TO_DATE"]),
                         IsBlocked = (TryParse.ToInt32(drCCard["IS_BLOCKED"]) == 1),
                         ContractorId = TryParse.ToInt32(drCCard["CONTRACTOR_ID"]),
-                        ContractorName = TryParse.ToString(drCCard["CONTRACTOR_NAME"])
+                        ContractorName = TryParse.ToString(drCCard["CONTRACTOR_NAME"]),
+                        DiscountGroupId = TryParse.ToInt32(drCCard["DISCOUNT_GROUP_ID"], -1),
+                        OwnerName = TryParse.ToString(drCCard["OWNER_NAME"]),
+                        CarNumber = TryParse.ToString(drCCard["CAR_NUMBER"]),
+                        IsInvoice = (TryParse.ToInt32(drCCard["IS_INVOICE"]) == 1),
+                        IsManualInput = (TryParse.ToInt32(drCCard["IS_MANUAL_INPUT"]) == 1),
+                        Password = TryParse.ToString(drCCard["C_PASSWORD"]),
+                        Comment = TryParse.ToString(drCCard["C_COMMENT"]),
+                        PaymentTypeId = TryParse.ToInt32(drCCard["S_PAYMENT_TYPE_ID"])
                     };
                 }
             }
@@ -86,12 +102,22 @@ namespace DyMix.Contexts
         {
             string commandText =
 @"INSERT INTO C_CARD
-  ( C_NUMBER, VALID_FROM_DATE, VALID_TO_DATE, IS_BLOCKED, CONTRACTOR_ID )
+  ( C_NUMBER, VALID_FROM_DATE, VALID_TO_DATE, IS_BLOCKED, CONTRACTOR_ID, DISCOUNT_GROUP_ID, OWNER_NAME
+  , CAR_NUMBER, IS_INVOICE, IS_MANUAL_INPUT, C_PASSWORD, C_COMMENT, S_PAYMENT_TYPE_ID )
  VALUES (" + SQLString(model.CNumber) +
  ", " + SQLDateTime(model.ValidFrom) +
  ", " + SQLDateTime(model.ValidTo) +
  ", " + SQLInt(model.IsBlocked) +
- ", " + SQLInt(model.ContractorId) + @")
+ ", " + SQLInt(model.ContractorId) +
+ ", " + SQLInt(model.DiscountGroupId) +
+ ", " + SQLString(model.OwnerName) +
+ ", " + SQLString(model.CarNumber) +
+ ", " + SQLInt(model.IsInvoice) +
+ ", " + SQLInt(model.IsManualInput) +
+ ", " + SQLString(model.Password) +
+ ", " + SQLString(model.Comment) +
+ ", " + SQLInt(model.PaymentTypeId) +
+@")
  
 SELECT @@IDENTITY";
 
@@ -110,6 +136,14 @@ SELECT @@IDENTITY";
        , VALID_TO_DATE = " + SQLDateTime(model.ValidTo) + @"
        , IS_BLOCKED = " + SQLInt(model.IsBlocked) + @"
        , CONTRACTOR_ID = " + SQLInt(model.ContractorId) + @"
+       , DISCOUNT_GROUP_ID = " + SQLInt(model.DiscountGroupId) + @"
+       , OWNER_NAME = " + SQLString(model.OwnerName) + @"
+       , CAR_NUMBER = " + SQLString(model.CarNumber) + @"
+       , IS_INVOICE = " + SQLInt(model.IsInvoice) + @"
+       , IS_MANUAL_INPUT = " + SQLInt(model.IsManualInput) + @"
+       , C_PASSWORD = " + SQLString(model.Password) + @"
+       , C_COMMENT = " + SQLString(model.Comment) + @"
+       , S_PAYMENT_TYPE_ID = " + SQLInt(model.PaymentTypeId) + @"
  WHERE ID = " + SQLInt(model.CardId);
 
             ExecuteNonQuery(commandText);

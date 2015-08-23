@@ -27,7 +27,17 @@ namespace DyMix.Controllers
         // GET: /CCard/New/Id
         public ActionResult New()
         {
-            CCardModel model = new CCardModel();
+            CCardModel model = new CCardModel()
+            {
+                CardId = 0,
+                CarNumber = "",
+                ValidFrom = DateTime.Now,
+                ValidTo = DateTime.Now.AddYears(1)
+            };
+            using (DiscountContext context = new DiscountContext())
+            {
+                ViewBag.DiscountGroups = context.GetGroupList();
+            }
             return View("Edit", model);
         }
 
@@ -38,16 +48,18 @@ namespace DyMix.Controllers
         {
             if (!ModelState.IsValid)
             {
+                using (DiscountContext context = new DiscountContext())
+                {
+                    ViewBag.DiscountGroups = context.GetGroupList();
+                }
                 return View("Edit", model);
             }
             else
             {
-                /*
-                using (ContractorContext context = new ContractorContext())
+                using (CCardContext context = new CCardContext())
                 {
-                    model.ContractorTypeId = 2; // Юридическо лице
                     context.Add(model);
-                }*/
+                }
                 return RedirectToAction("Index");
             }
         }
@@ -61,6 +73,10 @@ namespace DyMix.Controllers
             {
                 model = context.GetCard(id);
             }
+            using (DiscountContext context = new DiscountContext())
+            {
+                ViewBag.DiscountGroups = context.GetGroupList();
+            }
             return View("Edit", model);
         }
 
@@ -71,6 +87,10 @@ namespace DyMix.Controllers
         {
             if (!ModelState.IsValid)
             {
+                using (DiscountContext context = new DiscountContext())
+                {
+                    ViewBag.DiscountGroups = context.GetGroupList();
+                }
                 return View("Edit", model);
             }
             else
