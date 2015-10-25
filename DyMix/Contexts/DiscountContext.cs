@@ -130,6 +130,45 @@ namespace DyMix.Contexts
             }
             return model;
         }
+
+        /// <summary>
+        /// Списък на отстъките в групата
+        /// </summary>
+        public List<DiscountModel> GetGroupDiscounts(int id)
+        {
+            List<DiscountModel> model = new List<DiscountModel>();
+            string commandText =
+@"SELECT d.ID AS DISCOUNT_ID
+       , d.D_NAME
+       , d.VALID_FROM_DATE
+       , d.VALID_TO_DATE
+       , d.DISCOUNT_KIND_ID
+       , dk.DK_NAME
+       , d.D_VALUE
+ FROM DISCOUNT_GROUP_ITEM dgi
+ INNER JOIN DISCOUNT d ON d.ID = dgi.DISCOUNT_ID
+ LEFT JOIN DISCOUNT_KIND dk ON dk.ID = d.DISCOUNT_KIND_ID
+ WHERE dgi.DISCOUNT_GROUP_ID = " + SQLInt(id) + @"
+ ORDER BY d.D_NAME ";
+
+            using (DataTable dtDiscounts = FillDataTable(commandText))
+            {
+                foreach (DataRow drDiscount in dtDiscounts.Rows)
+                {
+                    model.Add(new DiscountModel()
+                    {
+                        DiscountId = TryParse.ToInt32(drDiscount["DISCOUNT_ID"]),
+                        Name = TryParse.ToString(drDiscount["D_NAME"]),
+                        DiscountKindId = TryParse.ToInt32(drDiscount["DISCOUNT_KIND_ID"]),
+                        DiscountKindName = TryParse.ToString(drDiscount["DK_NAME"]),
+                        ValidFrom = TryParse.ToDateTime(drDiscount["VALID_FROM_DATE"]),
+                        ValidTo = TryParse.ToDateTime(drDiscount["VALID_TO_DATE"]),
+                        Value = TryParse.ToDecimal(drDiscount["D_VALUE"]),
+                    });
+                }
+            }
+            return model;
+        }
         
         /// <summary>
         /// Списък групи отстъки

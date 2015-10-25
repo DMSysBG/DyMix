@@ -208,5 +208,31 @@ namespace DyMix.Controllers
             }
             return Json(discounts, JsonRequestBehavior.AllowGet);
         }
+
+        //
+        // POST: /Discount/JDiscountGroup
+        [HttpPost]
+        public ActionResult JDiscountGroup(int id = 0)
+        {
+            DiscountGroupModel model = null;
+            using (DiscountContext context = new DiscountContext())
+            {
+                model = context.GetDiscountGroup(id);
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        //
+        // POST: /Discount/JGroupDiscounts
+        [HttpPost]
+        public ActionResult JGroupDiscounts(int id = 0)
+        {
+            List<DiscountModel> model = null;
+            using (DiscountContext context = new DiscountContext())
+            {
+                model = context.GetGroupDiscounts(id);
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -47,3 +47,23 @@ function dmAutocomplete(sourceUrl, itemName, itemId) {
         $(this).autocomplete("search");
     });
 }
+
+function callDiscountGroup(id, funSuccess) {
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: '/Discount/JDiscountGroup',
+        data: {'id': id },
+        success: funSuccess
+    });
+}
+
+function callJGroupDiscounts(id, funSuccess) {
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: '/Discount/JGroupDiscounts',
+        data: { 'id': id },
+        success: funSuccess
+    });
+}
